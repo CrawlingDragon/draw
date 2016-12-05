@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中农在线抽奖</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body  style="background: #ff9235">
+	<div class="container">
+		<div class="draw-one">
+			<div class="two-title">抽取二等奖</div>
+			<div class="two-btn" id="two-btn">开始抽奖</div>
+			<div class="draw-cont two-cont"> <!-- 抽奖内容主体 -->
+				<ul id="uls">
+					<!-- <li>13512341234</li>
+					<li>13512341235</li>
+					<li>13512341236</li>
+					<li>13512341237</li>
+					<li>13512341238</li> -->
+				</ul>
+			</div>
+		</div>
+		<div class="btns-left">
+			<ul>
+				<li class="li1 unCur"><a href="index.html"></a></li>
+				<li class="li2 unCur"><a href="draw-one.html"></a></li>
+				<li class="li3 li-active"><a href="javascript:;"></a></li>
+				<li class="li4 unCur"><a href="draw-three.html"></a></li>
+			</ul>
+		</div>
+		<a href="draw-more.html" class="right right-two right-cur"></a>
+	</div>
+	<div class="draw-panna pan-one clear">
+		<div class="title t-one">二等奖中奖用户</div>
+		<ul class="getDraw-ul-one">
+			<!-- <li class="drawList">13511112132</li><li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li><li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li><li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li> -->
+		</ul>
+	</div>
+<script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript">
+//二等奖
+	$(document).ready(function(){
+		var timer1 = null;   //定义一个timer，后面setInterval后面全局调用
+		var timer2 = null;
+		var timer3 = null;
+		var timer4 = null;
+		var timer5 = null;
+		var arr = [];		//数字出现栏数字随机跳使用，也就是抽奖的号码池
+		var flag = 1;
+		var again = 0;
+		var drawArr = []; //获奖的数组
+		$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){ //获取总共的抽奖号码池
+             	var sum = ('<li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li>');
+             	for(var i in data.data){
+             		sum += '<li>' + data.data[i] + '</li>';
+             		arr.push(data.data[i]);
+             		document.getElementById('uls').innerHTML = sum; //初始的号码池插入html
+             	};
+            });
+
+		function getRelut(){   //获取中奖名单
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=2&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+				if(data.code != 200){
+					alert(data.message);
+					return;
+				};
+				setTimeout(function(){  //获取第一个数据 并清除跳动
+					clearInterval(timer1);
+					$('#uls').find('li:eq(0)').html(data.data[0]);
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[0] + '</li>'); 
+				},3000);
+				setTimeout(function(){  //获取第一个数据 并清除跳动
+					clearInterval(timer2);
+					$('#uls').find('li:eq(1)').html(data.data[1]);
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[1] + '</li>');  
+				},4000);
+				setTimeout(function(){  //获取第一个数据 并清除跳动
+					clearInterval(timer3);
+					$('#uls').find('li:eq(2)').html(data.data[2]);
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[2] + '</li>');  
+				},5000);
+				setTimeout(function(){  //获取第一个数据 并清除跳动
+					clearInterval(timer4);
+					$('#uls').find('li:eq(3)').html(data.data[3]); 
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[3] + '</li>'); 
+				},6000);
+				setTimeout(function(){  //获取第一个数据 并清除跳动
+					clearInterval(timer5);
+					$('#uls').find('li:eq(4)').html(data.data[4]); 
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[4] + '</li>'); 
+					flag = 2;
+					$('#two-btn').text('继续抽奖');
+				},7000);
+				
+			});
+		};
+
+		function allSet(){  //全部跳动函数
+			timer1 = setInterval(function(){
+				var num = Math.floor(Math.random() * arr.length); //随机数据的数组索引
+				$('#uls').find('li:eq(0)').html(arr[num]);    //每次li出现的号码
+			},20);
+			timer2 = setInterval(function(){
+				var num = Math.floor(Math.random() * arr.length); //随机数据的数组索引
+				$('#uls').find('li:eq(1)').html(arr[num]);    //每次li出现的号码
+			},20);
+			timer3 = setInterval(function(){
+				var num = Math.floor(Math.random() * arr.length); //随机数据的数组索引
+				$('#uls').find('li:eq(2)').html(arr[num]);    //每次li出现的号码
+			},20);
+			timer4 = setInterval(function(){
+				var num = Math.floor(Math.random() * arr.length); //随机数据的数组索引
+				$('#uls').find('li:eq(3)').html(arr[num]);    //每次li出现的号码
+			},20);
+			timer5 = setInterval(function(){
+				var num = Math.floor(Math.random() * arr.length); //随机数据的数组索引
+				$('#uls').find('li:eq(4)').html(arr[num]);    //每次li出现的号码
+			},20);
+		}
+
+
+		function alertDraw(){  //获奖者的弹窗
+			layer.confirm('是否还要在加抽？', {
+			  btn: ['确定','取消'] //按钮
+			},function(index){
+				layer.close(index);
+				allSet();
+				getRelut();
+			},function(){
+				$('#index-btn').text('继续抽奖');
+				flag = 2;
+				return;
+			});
+		};
+
+		function start(){
+				if(flag == 1){ //最开始状态，按钮显示开始抽奖
+					$('#uls li').removeClass('startTitle');
+					allSet();
+					getRelut();
+					$('#two-btn').text('抽奖中');	
+					flag = 3;		
+				}else if(flag == 2){//点过一次后 停止数字跳动，按钮显示为加抽
+					
+					if(again >=2){
+						alertDraw();
+						// alert(1);
+					}else{
+						allSet();
+						getRelut();
+						$('#two-btn').text('抽奖中');	
+						flag = 3;
+						again++;
+					}
+				}else if(flag == 3){ //抽奖中的时候
+					return;
+				}
+
+		};
+
+		$('#two-btn').on('click',function(){
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=2&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+				if(data.code != 200){
+					alert(data.message);
+					return;
+				}else{
+					start();	
+				}
+			});
+				
+		});
+
+
+		var a = 'drawNum02';   //localStorage.setItem的key
+		window.onbeforeunload = function(){     	 //离开网页触发的函数onbeforeunload
+				var sum = "";
+				$('.drawList').each(function(){		 //获取 获奖列表
+					var txt = '|' + $(this).text();  //为每个获奖号码加上一个'|'
+					sum = txt + sum;				
+					sum = sum.substr(0);			//去掉第一个'|'，便于后面的string转换成array。 
+				});
+			localStorage.setItem(a,sum);            //把所有的获奖内容存入内存
+		};
+		// localStorage.clear(); 
+		window.onload = function(){					//加载网页触发函数
+			var str = localStorage.getItem(a);     //从内存中获取获奖的string
+			var arr1 = str.split('|');            //用split分割成array
+			
+			for(var i = 0;i<arr1.length;i++){
+				if(arr1[i] != ""){               //去掉数组内空的元素
+					arr1.sort(function(a,b){     //号码排序
+						return a - b;
+					});
+					$('.getDraw-ul-one').append('<li class="drawList">' + arr1[i] + '</li>');     //重新把获奖名单插入到DOM
+
+				}
+			};
+
+		};
+
+	});
+</script>
+</body>
+</html>

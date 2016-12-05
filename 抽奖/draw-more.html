@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中农在线抽奖</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background: #ff9235">
+	<div class="container">
+		<div class="draw-specail"> 
+			<div class="draw-cont"> <!-- 抽奖内容主体 -->
+				<ul id="uls">
+					<!-- <li>13512341234</li>
+					<li>13512341235</li>
+					<li>13512341236</li>
+					<li>13512341237</li>
+					<li>13512341238</li> -->
+				</ul>
+			</div>
+			<h2 class="index-h2">抽取特等奖</h2>
+			<div class="index-btn" id="index-btn">
+				开始抽奖
+			</div>
+		</div>
+		<div class="btns-left">
+			<ul>
+				<li class="li1 unCur"><a href="index.html"></a></li>
+				<li class="li2 unCur"><a href="draw-one.html"></a></li>
+				<li class="li3 unCur"><a href="draw-two.html"></a></li>
+				<li class="li4 unCur"><a href="draw-three.html"></a></li>
+			</ul>
+		</div>
+		<a href="draw-list.html" class="right"></a> <!-- right-spacil right-one right-two right-three -->
+	</div>
+	<div class="draw-panna pan-one clear">
+		<div class="title t-one">一等奖中奖用户</div>
+		<ul class="getDraw-ul-one">
+			<!-- <li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li>
+			<li class="drawList">13511112132</li> -->
+		</ul>
+	</div>
+<!-- <button id="aa" onclick="setLocal()">123123123</button> -->
+<script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript">
+	var timer = null;   //定义一个timer，后面setInterval后面全局调用
+	var arr = [];		//数字出现栏数字随机跳使用
+	var flag = 1;
+	$(document).ready(function(){
+
+		$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){ //获取总共的抽奖号码池
+             	var sum = ('<li class="startTitle">待抽取</li>');
+             	for(var i in data.data){
+             		sum += '<li>' + data.data[i] + '</li>';
+             		arr.push(data.data[i]);
+             		document.getElementById('uls').innerHTML = sum; //初始的号码池插入html
+             	};
+             });
+
+// http://demoapp.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=1&way=1
+		function getRelut(){   //获取中奖名单
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+				if(data.code != 200){
+					alert(data.message);
+					return;
+				};
+				clearInterval(timer); //清除数字跳动定时函数
+				$('#uls').find('li:first').text(data.data[0]);   //把获奖号码显示到抽奖栏的第一栏
+				$('.getDraw-ul-one').append('<li class="drawList">' + data.data[0] + '</li>')//把获奖号码写入到下方的名单内
+				console.log(data.data[0]);
+			});
+		};
+
+
+		function start(){
+				if(flag == 1){ //最开始状态，按钮显示开始抽奖
+					$('#uls li').removeClass('startTitle');
+					timer = setInterval(function(){
+						var num = Math.floor(Math.random() * arr.length);  //随机数据的数组索引
+						$('#uls li').html(arr[num]);//每次li出现的号码
+					},10);
+					$('#index-btn').text('停止');
+					flag = 2;					
+				}else if(flag == 2){//点过一次后 停止数字跳动，按钮显示为加抽
+					$('#index-btn').text('加抽');
+					flag = 1;
+					getRelut();
+				}
+		};
+
+		
+		$('#index-btn').on('click',function(){
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=100&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+				if(data.code != 200){
+					alert(data.message);
+					return;
+				}else{
+					start();	
+				}
+			});
+			
+		});
+
+
+		window.onbeforeunload = function(){           //离开网页触发的函数onbeforeunload
+				setMoreItem('more1','.drawList');
+				// setMoreItem('more2','.drawList');
+				// setMoreItem('more3','.drawList');
+				// setMoreItem('more4','.drawList');
+		};
+		// localStorage.clear(); 
+		window.onload = function(){                //加载网页触发函数			
+				getMoreItem('more1','.getDraw-ul-one');
+				// getMoreItem('more2','.getDraw-ul-one');
+				// getMoreItem('more3','.getDraw-ul-one');
+				// getMoreItem('more4','.getDraw-ul-one');
+		};
+		
+	});
+</script>
+</body>
+</html>
