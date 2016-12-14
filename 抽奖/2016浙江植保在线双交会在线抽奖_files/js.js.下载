@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$('.right-cur').each(function(){
 		$(this).hover(function(){
 			$(this).animate({
-				'right':'0px'
+				'right':'0'
 			},600);
 		},function(){
 			$(this).animate({

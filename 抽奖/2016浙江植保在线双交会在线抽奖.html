@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>中农在线抽奖</title>
+	<title>2016浙江植保在线双交会在线抽奖</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body  style="background: #ff9235">
-	<div class="container"> <!-- container2 -->
+	<div class="container container3">   <!-- container2 -->
 		<div class="draw-specail draw-one">
 			<div class="draw-cont draw-cont two-cont"> <!-- 抽奖内容主体 -->
 				<ul id="uls">
@@ -17,68 +18,77 @@
 					<li>13512341238</li> -->
 				</ul>
 			</div>
-			<h2 class="index-h2">抽取一等奖</h2>
+			<h2 class="index-h2">抽取</h2>
 			<div class="index-btn" id="index-btn">
 				开始抽奖
 			</div>
 		</div>
 		<div class="btns-left">
 			<ul>
-				<li class="li1 unCur"><a href="index.html"></a></li>
-				<li class="li2 li-active"><a href="javascript:;"></a></li>
-				<li class="li3 unCur"><a href="draw-two.html"></a></li>
-				<li class="li4 unCur"><a href="draw-three.html"></a></li>
+				<li class="li1 unCur"><a href="http://zbonline.114nz.com/Home/Credit/locale_lootery?type=100&Id=1&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ"></a></li>
+				<li class="li2 unCur"><a href="http://zbonline.114nz.com/Home/Credit/locale_lootery?type=1&Id=1&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ"></a></li>
+				<li class="li3 li-active"><a href="javascript:;"></a></li>
+				<li class="li4 unCur"><a href="http://zbonline.114nz.com/Home/Credit/locale_lootery?type=3&Id=1&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ"></a></li>
 			</ul>
 		</div>
-		<a href="draw-more.html" class="right right-one right-cur"></a>
+		<a href="http://zbonline.114nz.com/Home/Credit/locale_lootery?type=2&Id=1&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ&action=add" class="right right-cur"></a> <!-- right-spacil 特等奖  right-one 一等奖 right-two 二等奖 right-three 三等奖 -->
 	</div>
 	<div class="draw-panna pan-one clear">
-		<div class="title">一等奖中奖用户</div>
+		<div class="title">中奖用户</div>
 		<ul class="getDraw-ul-one">
 			<!-- <li class="drawList">13511112132</li>
-			<li class="drawList">13511112132</li>
-			<li class="drawList">13511112132</li>
-			<li class="drawList">13511112132</li>
 			<li class="drawList">13511112132</li> -->
 		</ul>
 	</div>
-<script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
-<script type="text/javascript" src="js/js.js"></script>
-<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript" src="http://zbonline.114nz.com/Public/Meet/default/js/jquery.1.11.3.min.js"></script>
+<script type="text/javascript" src="http://zbonline.114nz.com/Public/Meet/default/js/js.js"></script>
+<script type="text/javascript" src="http://zbonline.114nz.com/Public/Meet/default/js/layer/layer.js"></script>
+
+
 <script type="text/javascript">
+	function GetQueryString(name)
+	{
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
 	var timer = null;   //定义一个timer，后面setInterval后面全局调用
 	var arr = [];		//数字出现栏数字随机跳使用
 	var flag = 1;
 	var again = 0;
-	var flagNum = 100;
+   	var flagNum = GetQueryString("type");
+	flagNum = +(flagNum);
+	// alert(flagNum);
 	$(document).ready(function(){
 
-		$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){ //获取总共的抽奖号码池
+		$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ",function(data){ //获取总共的抽奖号码池
 				var sum = null;
 				switch (flagNum){
 					case 100:                          //特等奖的时候
 					sum = ('<li class="startTitle">待抽取</li>');
 					$('.index-h2').text('抽取特等奖');
 					$('.title').text('特等奖中奖用户');
-					$('.container').removeClass('container2');
+					$('.container').removeClass('container2 container3');
 					break;
 					case 1:                            //一等奖的时候
 					sum = ('<li class="startTitle">待抽取</li>');
 					$('.index-h2').text('抽取一等奖');
 					$('.title').text('一等奖中奖用户');
-					$('.container').removeClass('container2');
+					$('.container').removeClass('container2 container3');
 					break;
 					case 2:                            //二等奖的时候
-					sum = ('<li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li>');
+					sum = ('<li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li>');
 					$('.index-h2').text('抽取二等奖');
 					$('.title').text('二等奖中奖用户');
-					$('.container').addClass('container2');
+					$('.container').addClass('container3').removeClass('container2');
+					alert(flagNum);
 					break;
 					case 3:                              //三等奖的时候
 					sum = ('<li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li><li class="startTitle">待抽取</li>');
 					$('.index-h2').text('抽取三等奖');
 					$('.title').text('三等奖中奖用户');
-					$('.container').addClass('container2');
+					$('.container').addClass('container2').removeClass('container3');
 					break;
 				}
              	 
@@ -108,7 +118,7 @@
 
 
 		function getRelut(){   //获取中奖名单
-			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=" + flagNum + "&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=2&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ",function(data){
 				if(data.code != 200){
 					alert(data.message);
 					return;
@@ -117,7 +127,7 @@
 				$('#uls').html(" ");     //初始化抽奖列表内容
 				for(var i = 0;i<data.data.length;i++){    //循环获取数据的数组
 					$('#uls').append('<li>' + data.data[i] + '</li>');   //把获奖号码显示到抽奖栏栏
-					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[i] + '</li>')//把获奖号码写入到下方的名单内
+					$('.getDraw-ul-one').append('<li class="drawList">' + data.data[i] + '</li>')  //把获奖号码写入到下方的名单内
 				};
 				console.log(data.data);
 			});
@@ -137,7 +147,6 @@
 					startDraw();
 					flag = 2;					
 				}else if(flag == 2){        //点过一次后 停止数字跳动，按钮显示为加抽
-					flag = 1;
 					$('#index-btn').text('继续抽');
 					getRelut();
 				}
@@ -145,7 +154,7 @@
 		};
 
 		$('#index-btn').on('click',function(){    //数据异常判断函数
-			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs_act?Id=1&flag=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){
+			$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&flag=2&token=9a38jhZKbEAI4CETjhPHk4Jt67Ic5mjsQ4ssAJmQ",function(data){
 				if(data.code != 200){
 					alert(data.message);
 					return;

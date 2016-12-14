@@ -50,7 +50,7 @@
 	var arr = [];		//数字出现栏数字随机跳使用
 	var flag = 1;
 	var again = 0;
-	var flagNum = 100;
+	var flagNum = 3;
 	$(document).ready(function(){
 
 		$.getJSON("http://zbonline.114nz.com/Home/Credit/get_locale_usrs?Id=1&token=c399ZGyXTWphgyKq1liJp_-7GOfmR7XzMywdA26z",function(data){ //获取总共的抽奖号码池
@@ -137,7 +137,6 @@
 					startDraw();
 					flag = 2;					
 				}else if(flag == 2){        //点过一次后 停止数字跳动，按钮显示为加抽
-					flag = 1;
 					$('#index-btn').text('继续抽');
 					getRelut();
 				}

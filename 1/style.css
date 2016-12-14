@@ -174,7 +174,7 @@ li,ul{
 	position: absolute;
 	right: 0;
 	top: 250px;
-	width: 290px;
+	width: 239px;
 	height: 70px;
 	background: url(images/tab_add.png) no-repeat center;
 }
@@ -274,8 +274,8 @@ li,ul{
 .draw-cont ul{
 	line-height: 40px;
 	overflow: hidden;
-	/*text-align: center;*/
-	font-size: 40px;
+	text-align: center;
+	font-size: 48px;
 	font-weight: bold;
 	font-family: '微软雅黑';
 	font-family: '华文细黑';
@@ -295,7 +295,12 @@ li,ul{
 	left: 226px;
     top: 198px;
 }
-
+.startTitle{
+	font-family: '微软雅黑';
+	color: #000;
+	font-size: 36px;
+	letter-spacing: 2px;
+}
 .two-title{
 	    position: absolute;
     left: 234px;
@@ -342,35 +347,4 @@ li,ul{
 .container2 .index-btn{
 	bottom: 147px;
     left: 222px;
-}
-.container3 .draw-specail{
-	width: 810px;
-	height: 830px;
-	background: url(images/box_big.jpg) no-repeat center;
-}
-.container3 .draw-cont{
-	top: 282px;
-	height: 318px;
-}
-.container3 .draw-cont ul{
-	height: 318px;
-	line-height: 63px;
-}
-.container3 .index-btn{
-	bottom: 128px;
-}
-.container .draw-cont ul li{
-	text-indent: 45px;
-}
-.container2 .draw-cont ul li,
-.container3 .draw-cont ul li{
-	text-indent: 60px;
-}
-.container .draw-cont ul .startTitle{
-	font-family: '微软雅黑';
-	color: #000;
-	font-size: 36px;
-	letter-spacing: 2px;
-	text-align: center;
-	text-indent: 0;
 }

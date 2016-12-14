@@ -74,7 +74,7 @@ li,ul{
 	background: url(images/title_all.png) no-repeat center;
 }
 .result{
-	background: #ff9235;
+	background: #ffffff;
 	color: #fff;
 	position: relative;
 	min-height: 400px;
@@ -105,15 +105,25 @@ li,ul{
 	margin-left: -68px;
 	text-align: center;
 	font-size: 30px;
-	font-family: '微软雅黑';
-	font-family: '华文细黑';
+
+	color:#FA4C48;
+	font-weight: 700;
+	font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
 }
+.result .wrap ul .title2{
+	 margin-left: 18px;
+	 text-align: center;
+	 font-size: 20px;
+	 color:#FA4C48;
+	 font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+ }
 .result .wrap ul li{
 	display: inline-block;
 	width: 255px;
 	font-size: 28px;
-	font-family: '微软雅黑';
-	font-family: '华文细黑';
+
+	color:#333333;
+	font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
 	margin-top: 30px;
 }
 .result .wrap .ul1 li{
@@ -218,7 +228,7 @@ li,ul{
 	text-align: left;
 }
 .getDraw-ul-one li{
-	width: 25%;
+	width: 33%;
 	float: left;
 	font-size: 25px;
 }
@@ -274,7 +284,7 @@ li,ul{
 .draw-cont ul{
 	line-height: 40px;
 	overflow: hidden;
-	/*text-align: center;*/
+	text-align: center;
 	font-size: 40px;
 	font-weight: bold;
 	font-family: '微软雅黑';
@@ -282,6 +292,9 @@ li,ul{
 }
 .container .index-h2{	
     position: absolute;
+
+
+
 	width: 380px;
 	height: 50px;
 	line-height: 50px;
@@ -295,7 +308,12 @@ li,ul{
 	left: 226px;
     top: 198px;
 }
-
+.startTitle{
+	font-family: '微软雅黑';
+	color: #000;
+	font-size: 36px;
+	letter-spacing: 2px;
+}
 .two-title{
 	    position: absolute;
     left: 234px;
@@ -342,35 +360,4 @@ li,ul{
 .container2 .index-btn{
 	bottom: 147px;
     left: 222px;
-}
-.container3 .draw-specail{
-	width: 810px;
-	height: 830px;
-	background: url(images/box_big.jpg) no-repeat center;
-}
-.container3 .draw-cont{
-	top: 282px;
-	height: 318px;
-}
-.container3 .draw-cont ul{
-	height: 318px;
-	line-height: 63px;
-}
-.container3 .index-btn{
-	bottom: 128px;
-}
-.container .draw-cont ul li{
-	text-indent: 45px;
-}
-.container2 .draw-cont ul li,
-.container3 .draw-cont ul li{
-	text-indent: 60px;
-}
-.container .draw-cont ul .startTitle{
-	font-family: '微软雅黑';
-	color: #000;
-	font-size: 36px;
-	letter-spacing: 2px;
-	text-align: center;
-	text-indent: 0;
 }
